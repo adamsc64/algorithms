@@ -6,6 +6,7 @@ class BloomFilter(object):
     def __init__(self, num_bits, num_hashers):
         self.num_bits = num_bits
         self.num_hashers = num_hashers
+        self.num_elements = 0
         self.bits = [False] * num_bits
         self.hashers = [self.get_hasher() for i in range(num_hashers)]
 
@@ -30,6 +31,7 @@ class BloomFilter(object):
         for hasher in self.hashers:
             position = hasher(element)
             self.bits[position] = True
+        self.num_elements += 1
 
     def query_for(self, element):
         for hasher in self.hashers:
