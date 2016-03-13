@@ -39,3 +39,15 @@ class BloomFilter(object):
                 return False
         # May be false positive
         return True
+
+    @property
+    def bits_set(self):
+        found = 0
+        for bit in self.bits:
+            if bit:
+                found += 1
+        return found
+
+    @property
+    def ratio_bits_set(self):
+        return 1.0 * self.bits_set / self.num_bits
