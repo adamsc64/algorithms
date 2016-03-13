@@ -1,1 +1,1 @@
-from bloom_filter import BloomFilter
+from bloom_filter import BloomFilter  # noqa
