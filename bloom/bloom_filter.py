@@ -25,3 +25,17 @@ class BloomFilter(object):
             hashed = hashed % self.num_bits
             return hashed
         return hasher
+
+    def add_element(self, element):
+        for hasher in self.hashers:
+            position = hasher(element)
+            self.bits[position] = True
+
+    def query_for(self, element):
+        for hasher in self.hashers:
+            position = hasher(element)
+            if not self.bits[position]:
+                # Definitely not in set
+                return False
+        # May be false positive
+        return True
