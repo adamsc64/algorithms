@@ -1,3 +1,6 @@
+import random
+
+
 class BloomFilter(object):
 
     def __init__(self, num_bits, num_hashers):
@@ -13,6 +16,12 @@ class BloomFilter(object):
         )
 
     def get_hasher(self):
+        random_factor = random.randint(0, self.num_bits - 1)
+
         def hasher(target):
-            pass
+            hashed = hash(target)
+            hashed = hashed % self.num_bits
+            hashed += random_factor
+            hashed = hashed % self.num_bits
+            return hashed
         return hasher
